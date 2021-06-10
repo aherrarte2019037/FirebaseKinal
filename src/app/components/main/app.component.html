@@ -1,0 +1,104 @@
+<h1 class="text-4xl font-semibold text-gray-800 mt-10 text-center">Firebase Cities</h1>
+
+<div [ngClass]="{'fadeInRight': showSuccess === 'show','fadeOutRight': showSuccess === 'hide','hidden': showSuccess === 'void' }"
+  class="alert success z-50 flex">
+  <div class="alert-left">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40">
+      <path
+        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
+    </svg>
+  </div>
+
+  <div class=" alert-right">
+    <div class="mx-3">
+      <span>Correcto</span>
+      <p>Operación realizada correctamente!</p>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="{'fadeInRight': showDelete === 'show','fadeOutRight': showDelete === 'hide','hidden': showDelete === 'void' }"
+  class="alert error z-50 flex">
+  <div class="alert-left">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40">
+      <path d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"/>
+    </svg>
+  </div>
+
+  <div class=" alert-right">
+    <div class="mx-3">
+      <span>Eliminado</span>
+      <p>Ciudad eliminada correctamente!</p>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="cityForm" (ngSubmit)="submitCityForm()">
+  <div class="col-span-2 md:col-span-1">
+    <label class="text-gray-500 text-sm">Ciudad</label>
+    <input formControlName="nombre" type="text"
+      class="block text-base  w-full px-4 py-2 mt-1 text-gray-600 bg-gray-200 rounded-md focus:outline-none">
+  </div>
+
+  <div class="col-span-2 md:col-span-1">
+    <label class="text-gray-500 text-sm">Habitantes</label>
+    <input formControlName="habitantes" type="text"
+      class="block text-base  w-full px-4 py-2 mt-1 text-gray-600 bg-gray-200 rounded-md focus:outline-none">
+  </div>
+
+  <div class="mx-auto col-span-2">
+    <div class="flex justify-center gap-x-3">
+
+      <button type="submit"
+        class="w-24 py-1.5 ring-2 ring-blue-300 leading-5 text-sm font-semibold tracking-wider text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">{{ formButtonText }}</button>
+      <button *ngIf="formButtonText === 'Confirmar'" (click)="cancelUpdate()"
+        class="w-24 py-1.5 ring-2 ring-indigo-300 leading-5 text-sm font-semibold tracking-wider text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Cancelar</button>
+
+    </div>
+  </div>
+
+</form>
+
+<div class="flex flex-wrap w-full justify-center px-5 mt-12 mb-16 gap-5">
+
+  <div *ngFor="let city of cities; trackBy:trackCities"
+    class="fade-in-top mx-12 sm:mx-0 sm:max-w-sm px-4 pt-3 pb-4 bg-white rounded-md shadow-md dark:bg-gray-800">
+    <div class="flex items-center justify-between">
+      <span class="text-sm font-light text-gray-800 dark:text-gray-400">Cloud Firestore</span>
+      <span
+        class="px-3 py-1 text-xs text-indigo-800 uppercase bg-indigo-200 rounded-full dark:bg-indigo-300 tracking-wider dark:text-indigo-900">Realtime</span>
+    </div>
+
+    <div>
+      <h1 class="mt-2 text-lg font-semibold text-gray-800 dark:text-white">
+        {{ city.nombre }}
+      </h1>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Odio eligendi similique exercitationem.
+      </p>
+    </div>
+
+    <div>
+      <div class="flex items-center mt-2 text-gray-700 dark:text-gray-200">
+        <span>Habitantes</span>
+        <a class="mx-2 text-blue-600 cursor-pointer dark:text-blue-400 hover:underline">{{ city.habitantes }}</a>
+      </div>
+
+      <div class="flex items-center gap-x-2 justify-center mt-4">
+
+        <button (click)="deleteCity(city.id)"
+          class="w-20 py-1.5 ring-2 ring-red-300 font-semibold text-sm text-white capitalize transition-colors duration-200 transform bg-red-500 rounded-md dark:bg-gray-800 hover:bg-red-600 dark:hover:bg-gray-700 focus:outline-none focus:bg-red-600 dark:focus:bg-gray-700">
+          Eliminar
+        </button>
+
+        <button (click)="updateCity( city )"
+          class="w-20 py-1.5 ring-2 ring-indigo-300 font-semibold text-sm text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-gray-800 hover:bg-indigo-600 dark:hover:bg-gray-700 focus:outline-none focus:bg-indigo-600 dark:focus:bg-gray-700">
+          Editar
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+</div>

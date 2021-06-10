@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angularfirebase-b424c": {
+      "hosting": {
+        "FirebaseKinal": [
+          "angularfirebase-b424c"
+        ]
+      }
+    }
+  }
+}

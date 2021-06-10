@@ -1,0 +1,73 @@
+form {
+    @apply bg-gray-50 grid grid-cols-1 py-5 px-9 shadow-md rounded-xl gap-6 sm:grid-cols-2 2xl:w-2/5 w-7/12 mx-auto mt-8;
+}
+
+form label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.fadeOutRight {
+	animation: fadeOutRight 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.fadeInRight {
+	animation: fadeInRight 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes fadeOutRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+}
+
+
+@keyframes fadeInRight {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+ 
+.alert {
+  @apply fixed right-5 w-full max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-md;
+}
+
+.alert-left {
+  @apply flex items-center justify-center w-12;
+}
+
+.alert-right {
+  @apply px-4 py-2 -mx-3 font-semibold;
+}
+
+.alert-right p {
+  font-weight: 500;
+  @apply text-sm -mt-1 text-gray-600;
+}
+
+.success .alert-left {
+  @apply bg-green-500;
+}
+
+.success .alert-right {
+  @apply text-green-500;
+}
+
+.error .alert-left {
+  @apply bg-red-500;
+}
+
+.error .alert-right {
+  @apply text-red-500;
+}
+
